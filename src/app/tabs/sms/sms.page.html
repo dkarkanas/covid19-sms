@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Αποστολή SMS
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Αποστολή SMS</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>    
+    <ion-item color="warning" *ngIf="missingDetails">
+      <p>Για την αποστολή SMS, πρέπει να έχει συμπληρωθεί το ονοματεπώνυμο και η διεύθυνση κατοικίας από το tab των
+        Ρυθμίσεων.</p>
+    </ion-item>
+
+    <ion-item *ngFor="let smsAction of smsActions" (click)="sendSms(smsAction)">
+      <ion-icon slot="start" name="{{smsAction.icon}}"></ion-icon>
+      <p>{{ smsAction.description }}</p>
+    </ion-item>
+        
+  </ion-list>
+</ion-content>
