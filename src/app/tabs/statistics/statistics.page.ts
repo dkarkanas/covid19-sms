@@ -46,9 +46,9 @@ export class StatisticsPage implements OnInit {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: "doughnut",
       data: {
-        labels: this.regions.map(item => item.region),                
+        labels: this.regions.map(item => item.region),
         datasets: [
-          {            
+          {
             data: this.regions.map(item => item.totalCases),
 
           }

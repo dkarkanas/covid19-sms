@@ -30,7 +30,7 @@ export class SmsPage implements OnInit {
 
     this.user = await this.getUser();
     this.missingDetails = this.invalidUser();
-    
+
     this.loading = false;
   }
 
@@ -47,7 +47,7 @@ export class SmsPage implements OnInit {
    */
   generateSms(smsItem: SmsItem): string {
 
-    if (this.missingDetails){
+    if (this.missingDetails) {
       return '';
     }
 
