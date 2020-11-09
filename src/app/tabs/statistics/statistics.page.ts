@@ -23,6 +23,9 @@ export class StatisticsPage implements OnInit {
 
   ngOnInit() {
 
+
+    // todo with observable variables
+
     this.covidService.getDaily().subscribe(x => {
       this.daily = x;
       console.log(x);
@@ -41,7 +44,7 @@ export class StatisticsPage implements OnInit {
 
   loadRegionsPie(): void {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-      type: "pie",
+      type: "doughnut",
       data: {
         labels: this.regions.map(item => item.region),                
         datasets: [

@@ -29,7 +29,7 @@ export class CovidApiService {
   getTotal(): Observable<Case> {
     return this.http.get(`${this.apiUrl}/total`).pipe(
       map((response: any) => response.cases as Case)
-    );
+    );    
   }
 
   getRegionTotal(): Observable<CaseRegion[]> {

@@ -13,16 +13,20 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>    
+  <ion-list *ngIf="!loading">
     <ion-item color="warning" *ngIf="missingDetails">
       <p>Για την αποστολή SMS, πρέπει να έχει συμπληρωθεί το ονοματεπώνυμο και η διεύθυνση κατοικίας από το tab των
         Ρυθμίσεων.</p>
     </ion-item>
 
-    <ion-item *ngFor="let smsAction of smsActions" (click)="sendSms(smsAction)">
+    <!-- (click)="sendSms(smsAction)" -->
+    <ion-item *ngFor="let smsAction of smsActions" href="{{generateSms(smsAction)}}" (click)="validateSmsAction()">
       <ion-icon slot="start" name="{{smsAction.icon}}"></ion-icon>
       <p>{{ smsAction.description }}</p>
+      <!-- <a href="sms:13033&body=1234">Sms 1</a>
+      <a href="sms://13033&body=1234">Sms 11</a> -->
+      <!-- <a href="sms://{{getSmsRecipient()}}&body={{getSmsBody(smsAction)}}">Sms 2</a> -->
     </ion-item>
-        
+
   </ion-list>
 </ion-content>
