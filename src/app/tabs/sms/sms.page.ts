@@ -46,6 +46,11 @@ export class SmsPage implements OnInit {
    * @param smsItem The sms item
    */
   generateSms(smsItem: SmsItem): string {
+
+    if (this.missingDetails){
+      return '';
+    }
+
     const sms = new SmsText(this.user, smsItem);
     return `sms:${Constants.smsNumber}?&body=${sms.toText()}`;
   }
