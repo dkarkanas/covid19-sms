@@ -20,7 +20,12 @@
         Ρυθμίσεων <ion-icon name="settings-outline"></ion-icon>.</p>
     </ion-item>
 
-    <ion-item *ngFor="let smsAction of smsActions" href="{{generateSms(smsAction)}}" (click)="validateSmsAction()">
+    <ion-item color="primary" *ngIf="inactiveSmsActions" >
+      <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+      <p>Κάποιες επιλογές δεν ισχύουν αυτήν την ώρα.</p>
+    </ion-item>
+
+    <ion-item *ngFor="let smsAction of smsActions" href="{{generateSms(smsAction)}}" (click)="validateSmsAction()" disabled="{{smsAction.active}}">
       <ion-icon slot="start" name="{{smsAction.icon}}"></ion-icon>
       <p>{{ smsAction.description }}</p>
     </ion-item>

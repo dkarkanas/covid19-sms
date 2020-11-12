@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Constants } from 'src/app/app.constants';
+import { SmsService } from 'src/app/services/sms.service';
 import { SmsItem, SmsText, User } from 'src/app/shared/interfaces';
-import { SmsActions } from './sms-actions.data';
 
 @Component({
   selector: 'app-sms',
@@ -15,13 +15,16 @@ export class SmsPage implements OnInit {
   missingDetails = false;
   loading = true;
   user: User;
+  inactiveSmsActions = false;
 
   constructor(
-    private storage: Storage
+    private storage: Storage,
+    private smsService: SmsService
   ) { }
 
   ngOnInit() {
-    this.smsActions = SmsActions.getAvailabelActions();
+    this.smsActions = this.smsService.getAvailabelActions();
+    this.inactiveSmsActions =  this.smsService.smsActionsHaveInactiveItems();
   }
 
   // ionic specific event
@@ -62,5 +65,4 @@ export class SmsPage implements OnInit {
   async getUser(): Promise<User> {
     return this.storage.get(Constants.storageKeys.user);
   }
-
 }
