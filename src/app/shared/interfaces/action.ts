@@ -6,5 +6,5 @@ export enum Action {
     Bank,
     HelpOthers,
     Funeral,
-    Excersice
+    Exercise
 }

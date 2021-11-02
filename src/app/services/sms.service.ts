@@ -42,7 +42,7 @@ export class SmsService {
         activeTo: { hours: 21, minutes: 0 }
       },
       {
-        action: Action.Excersice,
+        action: Action.Exercise,
         description: '6. Σωματική άσκηση σε εξωτερικό χώρο ή κίνηση με κατοικίδιο ζώο, ατομικά ή ανά δύο άτομα, τηρώντας στην τελευταία αυτή περίπτωση την αναγκαία απόσταση 1,5 μέτρου.',
         icon: 'walk-outline'
       },
@@ -50,7 +50,7 @@ export class SmsService {
 
   constructor() { }
 
-  getAvailabelActions(): SmsItem[] {
+  getAvailableActions(): SmsItem[] {
     return this._availableActions
       .map(sms => {
         // fix active

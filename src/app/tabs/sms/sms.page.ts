@@ -23,7 +23,7 @@ export class SmsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.smsActions = this.smsService.getAvailabelActions();
+    this.smsActions = this.smsService.getAvailableActions();
     this.inactiveSmsActions =  this.smsService.smsActionsHaveInactiveItems();
   }
 
