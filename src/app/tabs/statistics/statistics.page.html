@@ -6,22 +6,22 @@
 
 <ion-content>
 
-<ion-list>
-  <ion-item *ngIf="total !== null">
-    Κρούσματα: {{total?.confirmed}}, <br>
-    Θάνατοι: {{total?.deaths}}, <br>
-    Τελευταία ενημέρωση: {{total?.date | date}}
-  </ion-item>
-</ion-list>
+  <ion-list>
+    <ion-item *ngIf="total$ | async as total">
+      Κρούσματα: {{total?.confirmed}}, <br>
+      Θάνατοι: {{total?.deaths}}, <br>
+      Τελευταία ενημέρωση: {{total?.date | date}}
+    </ion-item>
+  </ion-list>
 
 
-<ion-card>
-  <ion-card-header>
-    Κρούσματα ανα περιοχή
-  </ion-card-header>
-  <ion-card-content>
-    <canvas #doughnutCanvas></canvas>
-  </ion-card-content>
-</ion-card>
+  <ion-card>
+    <ion-card-header>
+      Κρούσματα ανα περιοχή
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

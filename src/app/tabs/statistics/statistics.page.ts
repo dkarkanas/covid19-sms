@@ -2,8 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Case } from './interfaces/case';
 import { CaseRegion } from './interfaces/CaseRegion';
 import { CovidApiService } from './services/covid-api.service';
-
+import { Observable } from 'rxjs';
 import { Chart } from "chart.js";
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-statistics',
@@ -12,9 +13,9 @@ import { Chart } from "chart.js";
 })
 export class StatisticsPage implements OnInit {
 
-  total: Case;
-  daily: Case[];
-  regions: CaseRegion[];
+  total$: Observable<Case>;
+  daily$: Observable<Case[]>;
+  regions$: Observable<CaseRegion[]>;
 
   @ViewChild("doughnutCanvas") doughnutCanvas: ElementRef;
   private doughnutChart: Chart;
@@ -22,35 +23,22 @@ export class StatisticsPage implements OnInit {
   constructor(private covidService: CovidApiService) { }
 
   ngOnInit() {
-
-
-    // todo with observable variables
-
-    this.covidService.getDaily().subscribe(x => {
-      this.daily = x;
-      console.log(x);
-    })
-
-    this.covidService.getTotal().subscribe(x => {
-      this.total = x;
-      console.log(x);
-    })
-
-    this.covidService.getRegionTotal().subscribe(x => {
-      this.regions = x;
-      this.loadRegionsPie();
-    })
+    this.daily$ = this.covidService.getDaily();
+    this.total$ = this.covidService.getTotal();
+    this.regions$ = this.covidService.getRegionTotal()
+      .pipe(
+        tap(regions => this.loadRegionsPie(regions))
+      );
   }
 
-  loadRegionsPie(): void {
+  loadRegionsPie(regions: CaseRegion[]): void {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: "doughnut",
       data: {
-        labels: this.regions.map(item => item.region),
+        labels: regions.map(item => item.region),
         datasets: [
           {
-            data: this.regions.map(item => item.totalCases),
-
+            data: regions.map(item => item.totalCases)
           }
         ]
       }
